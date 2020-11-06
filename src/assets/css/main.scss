@@ -1,0 +1,47 @@
+/* 整体布局 */
+* {
+    /* 全部占满 */
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body,
+#app,
+.el-container{
+    /* 宽高占满全屏 */
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    /* 小圆角 */
+    border-radius: 2px;
+}
+
+/* 头部左侧整体样式 */
+.head-left{
+    float: left;
+    /* 块状隔开 */
+    margin-right: 20px;
+}
+
+/* 头部右侧整体样式 */
+.head-right{
+    float: right;
+    /* 块状隔开 */
+    margin-left: 20px;  
+}
+
+/* 按钮div块水平居中 */
+.btn-center {
+    margin: 0 auto;
+    text-align: center;
+}
+/* 覆盖scrollbar中 overflow: scroll; 会导致横向滚动条*/
+.el-scrollbar__wrap {
+    overflow: hidden;
+}
+
+/* .el-footer {
+    background-color: #409EFF;
+    line-height: 40px;
+} */
