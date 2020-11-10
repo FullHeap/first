@@ -9,10 +9,11 @@ function resolve(dir) {
 //覆盖vue默认配置
 module.exports = {
     runtimeCompiler: true,
-    publicPath:'',
+    publicPath:'/',
     devServer: {
         host: '0.0.0.0',
         port: port,
+        //暂时不使用代理
        /*  proxy: {
           '/dev_api': {
             target: 'http://localhost:8081',

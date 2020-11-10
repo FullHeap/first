@@ -73,8 +73,8 @@
 import loginHeader from "@/layout/components/LoginHeader.vue";
 /* 底部 */
 import mainFooter from "@/layout/components/MainFooter.vue";
-import { filterAsyncRouter } from "@/router/constrouter";
-import { getRouters } from "@/api/login";
+// import { filterAsyncRouter } from "@/router/constrouter";
+// import { getRouters } from "@/api/login";
 
 export default {
   name: "login",
@@ -119,21 +119,23 @@ export default {
           debugger;
 
           /* 获取菜单 */
-          getRouters().then(res => {
+         /*  getRouters().then(res => {
             console.log(res.data);
-          });
+          }); */
 
-          this.axios
+         /*  this.axios
             .get("https://mock.yonyoucloud.com/mock/16090/fxbank/test/menu")
             .then(response => {
-              /* response 第一层是promise ，数据中再是data */
+               //response 第一层是promise ，数据中再是data 
               sessionStorage.setItem(
                 "allrouter",
                 filterAsyncRouter(response.data.data)
               );
-              this.$router.addRoutes(filterAsyncRouter(response.data.data));
+              let res = response.data;
+              
+              this.$router.addRoutes(filterAsyncRouter(res.data));
               console.log(this.$router);
-            });
+            }); */
 
           if ("admin" == this.ruleForm.username) {
             /* 管理员 */

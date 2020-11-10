@@ -52,18 +52,18 @@ export default {
     return {
       isCollapse:true,
       user: "尹祯",
-      fullscreen:true
+      fullscreen:true,
     };
   },
   methods:{
     // 侧边栏折叠
     collapseChage() {
-      console.log("isCollapse:"+this.isCollapse);
       this.isCollapse = !this.isCollapse;
       bus.$emit("Collapse", this.isCollapse);
     },
     handleFullScreen(){
-
+      let a = "银针";
+      this.user = a;
     }
   }
 };

@@ -58,8 +58,6 @@ export const constantRoutes2 = [
 
 //遍历后台传来的路由字符串，转换为组件对象
 export function filterAsyncRouter(asyncRouterMap) { 
-    // asyncRouterMap = [];
-    // let asyncRouterMapx = getmenu();
     console.log("asyncRouterMap"+asyncRouterMap);
     const accessedRouters = asyncRouterMap.filter(route => {
         if (route.component) {
