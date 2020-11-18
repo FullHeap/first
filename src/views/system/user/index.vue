@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import { testPost } from "@/api/test";
+
 export default {
   name: "user",
   data() {
@@ -49,9 +49,7 @@ export default {
     };
   },
   methods: {
-    test() {
-      testPost().then({});
-    }
+   
   }
-};
+}; 
 </script>

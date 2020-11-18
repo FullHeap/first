@@ -88,5 +88,6 @@ export function filterAsyncRouter(asyncRouterMap) {
 /* 加载路由组件，两种方式均可 */
 const loadView = (view) => { // 路由懒加载
     // return (resolve) => require([`@/views/${view}`], resolve)
-    return () => import('@/views/' + view)
+    // return () => import('@/views/' + view)
+    return () => Promise.resolve(require(`@/views/${view}`))
 }
