@@ -1,11 +1,15 @@
 <template>
-  <div class="about">
-    <h1>This is an user page</h1>
+  <div class="hello">
+    <h1>{{ msg }}</h1>
   </div>
 </template>
-
 <script>
 export default {
-  name: 'user'
-}
+  name: "user",
+  data() {
+    return {
+      msg:"user page"
+    };
+  }
+};
 </script>

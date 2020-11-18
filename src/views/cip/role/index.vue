@@ -1,11 +1,15 @@
 <template>
-  <div class="about">
-    <h1>This is an role page</h1>
+  <div class="hello">
+    <h1>{{ msg }}</h1>
   </div>
 </template>
-
 <script>
 export default {
-  name: 'role'
-}
+  name: "role",
+  data() {
+    return {
+      msg:"role page"
+    };
+  }
+};
 </script>

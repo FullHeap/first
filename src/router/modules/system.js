@@ -9,6 +9,7 @@ export default [
     {
         path: "/system",
         name: 'SystemIndex',
+        /* redirect: 'home', */
         component: () => import('@/layout/main'),//children中的组件将会显示在main的router-view中
         meta: {
             title: '系统主页',

@@ -41,7 +41,7 @@
 <script>
 import { testPost } from "@/api/test";
 export default {
-  name: "user",
+  name: "test",
   data() {
     return {
       string1: "1",

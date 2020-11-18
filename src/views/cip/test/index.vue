@@ -5,10 +5,10 @@
 </template>
 <script>
 export default {
-  name: "home",
+  name: "test",
   data() {
     return {
-      msg:"home page"
+      msg:"test page"
     };
   }
 };

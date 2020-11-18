@@ -29,15 +29,8 @@
           <el-row :gutter="5">
             <el-col :span="10">
               <el-button-group>
-                <el-button type="info" @click="submitForm" icon="el-icon-search"
-                  >查询</el-button
-                >
-                <el-button
-                  type="warning"
-                  @click="resetForm"
-                  icon="el-icon-refresh"
-                  >重置</el-button
-                >
+                <el-button type="info" @click="submitForm()" icon="el-icon-search">查询</el-button>
+                <el-button type="warning" @click="resetForm()" icon="el-icon-refresh" >重置</el-button>
               </el-button-group>
             </el-col>
           </el-row>
@@ -45,21 +38,9 @@
         <el-row>
           <el-col :span="10">
             <el-button-group>
-              <el-button type="primary" @click="handleAdd" icon="el-icon-plus"
-                >新增</el-button
-              >
-              <el-button
-                type="success"
-                @click="handleUpdate"
-                icon="el-icon-edit"
-                >修改</el-button
-              >
-              <el-button
-                type="danger"
-                @click="handleDelete"
-                icon="el-icon-delete"
-                >删除</el-button
-              >
+              <el-button type="primary" @click="handleAdd()" icon="el-icon-plus">新增</el-button>
+              <el-button type="success" @click="handleUpdate()" icon="el-icon-edit" >修改</el-button>
+              <el-button type="danger" @click="handleDelete()" icon="el-icon-delete" >删除</el-button>
             </el-button-group>
           </el-col>
           <el-col :span="10">
@@ -195,7 +176,25 @@ export default {
   method: {
     deleteRow(index, rows) {
       rows.splice(index, 1);
-    }
+    },
+    submitForm() {
+      return;
+    },
+    resetForm() {
+      return;
+    },
+    handleQuery(){
+      return;
+    },
+    handleAdd(){
+      return;
+    },
+    handleUpdate(){
+      return;
+    },
+    handleDelete(){
+      return;
+    },
   }
 };
 </script>

@@ -1,4 +1,4 @@
-const port = process.env.port || process.env.npm_config_port || 8080 
+const port = process.env.port || process.env.npm_config_port || 80
 
 //添加图标路径解析
 const path = require('path')
@@ -14,19 +14,12 @@ module.exports = {
         host: '0.0.0.0',
         port: port,
         //暂时不使用代理
-       /*  proxy: {
-          '/dev_api': {
+        proxy: {
+          '/api': {
             target: 'http://localhost:8081',
-            //target: 'http://120.92.151.50:8080',
-            changeOrigin: true
-          },
-          '/': {
-            target: 'http://localhost:8080',
-            //target: 'http://120.92.151.50:8080',
             changeOrigin: true
           }
-        } */
-        
+        }
     },
     //设置 svg图标  需要添加dev依赖svg-sprite-loader
     chainWebpack(config) {

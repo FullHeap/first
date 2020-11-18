@@ -9,10 +9,10 @@ import system from '@/layout/main';
 
 /* constantRoutes静态路由，所有用户均可访问 */
 export const constantRoutes1 = [
-    /* {
+    {
         path: '/',
         redirect: '/login'
-    }, */
+    }, 
     // 系统登录    
     {
         path: '/login',
@@ -22,6 +22,19 @@ export const constantRoutes1 = [
             title: '用户登录'
         }
     },
+    /* {
+        path: '',
+        redirect: 'index',
+        component: () => import('@/layout/main'),
+        children: [
+            {
+                path: 'index',
+                component: () => import('@/views/system/home'),
+                name: '首页',
+                meta: { title: '首页', icon: 'dashboard', noCache: true, affix: true }
+            }
+        ]
+    }, */
     // 系统首页    
     {
         path: '/index',
@@ -58,7 +71,7 @@ export const constantRoutes2 = [
 
 //遍历后台传来的路由字符串，转换为组件对象
 export function filterAsyncRouter(asyncRouterMap) { 
-    console.log("asyncRouterMap"+asyncRouterMap);
+    // console.log("asyncRouterMap"+asyncRouterMap);
     const accessedRouters = asyncRouterMap.filter(route => {
         if (route.component) {
             if (route.component === 'system') {

@@ -98,34 +98,7 @@ export default {
     },
     getMenu() {},
     routeradd() {
-      // let routers1 = [
-      //   {
-      //     path: "/404",
-      //     title: "404页面",
-      //     component: () => import("@/views/error/404"),
-      //     meta: {
-      //       icon: "el-icon-circle-close",
-      //       role: ["admin"]
-      //     }
-      //   }
-      // ];
-      // let routers2 = filterAsyncRouter(routers1)
-      // console.log("routers1:" + JSON.stringify(routers1));
-      // console.log("routers1:" + JSON.stringify(routers1[0].component));
-      // console.log("routers2:" + JSON.stringify(routers2));
-      // router.options.routes = asrouter;
-      // this.$router.addRoutes([
-      //   {
-      //     path: "/404",
-      //     name: "404",
-      //     component: () => import("@/views/error/404"),
-      //     meta: {
-      //       title: "404"
-      //     }
-      //   }
-      // ]);
-      // console.log(this.$router);
-      // console.log(this.$router.options.routes);
+      
     }
   },
 

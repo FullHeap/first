@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import { constantRoutes1, /* constantRoutes2, */ filterAsyncRouter } from "@/router/constrouter";
+import { constantRoutes1, constantRoutes2, filterAsyncRouter } from "@/router/constrouter";
 import { asyncRoutes } from "@/mock/json/menu";
 
 Vue.use(VueRouter)
@@ -18,8 +18,8 @@ router.addRoutes(constantRoutes1);
 /* 加载后端路由 */
 router.addRoutes(filterAsyncRouter(asyncRoutes));
 /* 加载 404 */
-// router.addRoutes(constantRoutes2);
-  console.log(router.matcher);
+router.addRoutes(constantRoutes2);
+// console.log(router.matcher);
 
 
 // 路由变化时

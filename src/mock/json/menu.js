@@ -4,7 +4,7 @@ const asyncRoutes = [
         "name": 'SystemIndex',
         "component": "system",
         "meta": {
-            "title": "系统管理",
+            "title": "sys系统管理",
             "icon": "el-icon-setting",
             "role": [
                 "admin"
@@ -12,7 +12,18 @@ const asyncRoutes = [
         },
         "children": [
             {
-                "path": "role",
+                "path": "/system/home",
+                "component": "system/home",
+                "meta": {
+                    "title": "欢迎登录",
+                    "icon": "el-icon-star-on",
+                    "role": [
+                        "admin"
+                    ]
+                }
+            },
+            {
+                "path": "/system/role",
                 "component": "system/role",
                 "meta": {
                     "title": "角色管理",
@@ -23,7 +34,7 @@ const asyncRoutes = [
                 }
             },
             {
-                "path": "user",
+                "path": "/system/user",
                 "component": "system/user",
                 "meta": {
                     "title": "用户管理",
@@ -34,7 +45,7 @@ const asyncRoutes = [
                 }
             },
             {
-                "path": "menu",
+                "path": "/system/menu",
                 "component": "system/menu",
                 "meta": {
                     "title": "菜单管理",
@@ -45,7 +56,7 @@ const asyncRoutes = [
                 }
             },
             {
-                "path": "trans",
+                "path": "/system/trans",
                 "component": "system/trans",
                 "meta": {
                     "title": "多系统",
@@ -56,8 +67,8 @@ const asyncRoutes = [
                 }
             },
             {
-                "path": "test",
-                "component": "system/home",
+                "path": "/system/test",
+                "component": "system/test",
                 "meta": {
                     "title": "系统测试",
                     "icon": "el-icon-success",
@@ -69,137 +80,56 @@ const asyncRoutes = [
         ]
     },
     {
-        "path": "/compents",
+        "path": "/cip",
+        "name": 'CipIndex',
         "component": "system",
         "meta": {
-            "title": "组件测试",
-            "icon": "el-icon-s-tools",
+            "title": "cip系统管理",
+            "icon": "el-icon-setting",
             "role": [
                 "admin"
             ]
         },
         "children": [
             {
-                "path": "multimenu",
-                "component": "home",
+                "path": "/cip/home",
+                "component": "cip/home",
                 "meta": {
-                    "title": "多级菜单",
-                    "icon": "el-icon-s-opportunity",
-                    "role": [
-                        "admin"
-                    ]
-                },
-                "children": [
-                    {
-                        "path": "editor",
-                        "component": "home",
-                        "meta": {
-                            "title": "富文本编辑器",
-                            "icon": "el-icon-s-opportunity",
-                            "role": [
-                                "admin"
-                            ]
-                        }
-                    },
-                    {
-                        "path": "markdown",
-
-                        "component": "/system/home",
-                        "meta": {
-                            "title": "markdown编辑器",
-                            "icon": "el-icon-s-opportunity",
-                            "role": [
-                                "admin"
-                            ]
-                        }
-                    }
-                ]
-            },
-            {
-                "path": "tables",
-                "component": "home",
-                "meta": {
-                    "title": "表格组件",
-                    "icon": "el-icon-s-opportunity",
+                    "title": "欢迎登录",
+                    "icon": "el-icon-star-on",
                     "role": [
                         "admin"
                     ]
                 }
             },
             {
-                "path": "trees",
-                "component": "/system/home",
+                "path": "/cip/role",
+                "component": "cip/role",
                 "meta": {
-                    "title": "树组件",
-                    "icon": "el-icon-s-opportunity",
+                    "title": "角色管理",
+                    "icon": "el-icon-star-on",
                     "role": [
                         "admin"
                     ]
                 }
             },
             {
-                "path": "icon",
-                "component": "/system/home",
+                "path": "/cip/user",
+                "component": "cip/user",
                 "meta": {
-                    "title": "自定义图标",
-                    "icon": "el-icon-s-opportunity",
+                    "title": "用户管理",
+                    "icon": "el-icon-user-solid",
                     "role": [
                         "admin"
                     ]
                 }
             },
             {
-                "path": "charts",
-                "component": "/system/home",
+                "path": "/cip/test",
+                "component": "cip/test",
                 "meta": {
-                    "title": "schart图表",
-                    "icon": "el-icon-s-opportunity",
-                    "role": [
-                        "admin"
-                    ]
-                }
-            }
-        ]
-    },
-    {
-        "path": "/error",
-        "component": "system",
-        "meta": {
-            "title": "错误处理",
-            "icon": "el-icon-error",
-            "role": [
-                "admin"
-            ]
-        },
-        "children": [
-            {
-                "path": "403",
-                "component": "403",
-                "meta": {
-                    "title": "403页面",
-                    "icon": "el-icon-circle-close",
-                    "role": [
-                        "admin"
-                    ]
-                }
-            },
-            {
-                "path": "500",
-                "component": "500",
-                "meta": {
-                    "title": "500页面",
-                    "icon": "el-icon-circle-close",
-                    "role": [
-                        "admin"
-                    ]
-                }
-            },
-            {
-                "path": "404",
-                "component": "404",
-                "meta": {
-                    "title": "404页面",
-                    "icon": "el-icon-circle-close",
+                    "title": "系统测试",
+                    "icon": "el-icon-success",
                     "role": [
                         "admin"
                     ]

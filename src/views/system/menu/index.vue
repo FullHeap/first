@@ -5,10 +5,10 @@
 </template>
 <script>
 export default {
-  name: "home",
+  name: "menuList",
   data() {
     return {
-      msg:"home page"
+      msg:"menu page"
     };
   }
 };

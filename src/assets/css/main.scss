@@ -17,6 +17,11 @@ body,
     border-radius: 2px;
 }
 
+ul li a{
+    /* ul li a 去掉下划线 */
+    text-decoration:none;
+}
+
 /* 头部左侧整体样式 */
 .head-left{
     float: left;

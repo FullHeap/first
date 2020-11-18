@@ -51,10 +51,12 @@
             </el-input>
           </el-form-item>
           <el-form-item>
+            <!-- loading 可显示加载中状态 :loading="true"-->
             <el-button
               style="width:100%;"
               type="primary"
               @click="submitForm('ruleForm')"
+              
             >
               <span v-if="!loading">登 录</span>
               <span v-else>登 录 中...</span>
@@ -116,7 +118,7 @@ export default {
 
           /* 获取后台用户信息 */
           sessionStorage.setItem("userid", this.ruleForm.username);
-          debugger;
+          // debugger;
 
           /* 获取菜单 */
          /*  getRouters().then(res => {
@@ -139,7 +141,7 @@ export default {
 
           if ("admin" == this.ruleForm.username) {
             /* 管理员 */
-            this.$router.push({ path: "/system/" });
+            this.$router.push({ path: "/system/home" });
           }
           if ("cip" == this.ruleForm.username) {
             /* cip系统用户 */
