@@ -1,7 +1,6 @@
+/* 静态 router */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-// import LAYOUT from "@/router/modules/layout"
-// import SYSTEM from "@/router/modules/system"
 import ERROR from "@/router/modules/error"
 
 Vue.use(VueRouter)

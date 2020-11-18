@@ -1,6 +1,6 @@
+/* 动态加载 router */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
 import { constantRoutes1, constantRoutes2, filterAsyncRouter } from "@/router/constrouter";
 import { asyncRoutes } from "@/mock/json/menu";
 
@@ -19,8 +19,6 @@ router.addRoutes(constantRoutes1);
 router.addRoutes(filterAsyncRouter(asyncRoutes));
 /* 加载 404 */
 router.addRoutes(constantRoutes2);
-// console.log(router.matcher);
-
 
 // 路由变化时
 router.beforeEach((to, from, next) => {
@@ -29,19 +27,6 @@ router.beforeEach((to, from, next) => {
     document.title = to.meta.title;
   }
   next();
- /*  // 判断用户登录状态 
-  let userid = sessionStorage.getItem("userid");
-  // 用户已登录 
-  if (userid != null) {
-    next();
-  }
-  else {
-    if (to.path === "/login") {
-      next();
-    } else {
-      next("/login");
-    }
-  } */
 })
 
 export default router

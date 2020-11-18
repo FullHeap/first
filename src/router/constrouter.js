@@ -1,11 +1,5 @@
 import ERROR from './modules/error'
 import system from '@/layout/main';
-// import { getmenu } from '../api/layout/layout';
-// import __import from '@/router/_import'
-// import LAYOUT from './modules/layout'
-// import SYSTEM from './modules/system'
-// import CIP from './modules/cip'
-
 
 /* constantRoutes静态路由，所有用户均可访问 */
 export const constantRoutes1 = [

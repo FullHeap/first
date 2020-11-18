@@ -1,3 +1,4 @@
+/* 模块化 router */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import LAYOUT from "@/router/modules/layout"
