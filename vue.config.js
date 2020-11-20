@@ -13,6 +13,7 @@ module.exports = {
 
   // 是否开启eslint保存检测，有效值：ture | false | 'error'
   lintOnSave: process.env.NODE_ENV === 'dev',
+  
   devServer: {
     host: '0.0.0.0',
     port: port,

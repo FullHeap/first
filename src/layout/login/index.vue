@@ -145,11 +145,11 @@ export default {
           }
           if ("cip" == this.ruleForm.username) {
             /* cip系统用户 */
-            this.$router.replace("/cip/");
+            this.$router.replace("/cip/home");
           }
           if ("cap" == this.ruleForm.username) {
             /* cap系统用户 */
-            this.$router.replace("/cap/");
+            this.$router.replace("/cap/home");
           }
           return true;
         } else {
