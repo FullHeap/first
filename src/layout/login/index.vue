@@ -75,12 +75,14 @@
 import loginHeader from "@/layout/components/LoginHeader.vue";
 /* 底部 */
 import mainFooter from "@/layout/components/MainFooter.vue";
-// import { filterAsyncRouter } from "@/router/constrouter";
-// import { getRouters } from "@/api/login";
+import store from "@/store"
 
 export default {
   name: "login",
   components: { loginHeader, mainFooter },
+  created(){
+    store.dispatch('GenerateRoutes');
+  },
   data: function() {
     return {
       ruleForm: {

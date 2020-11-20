@@ -50,7 +50,7 @@ export const getRouters = () => {
 // 获取路由
 export function getRouters() {
   return request({
-     url: '/dev_api/getRouters',
+     url: '/getRouters',
      method: 'get'
  })
 }

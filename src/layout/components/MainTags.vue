@@ -124,15 +124,7 @@
         height: 30px;
         overflow: hidden;        
         background: #ffffff;
-        /* padding-right: 120px; */
-        /* box-shadow: 0 5px 10px #ddd; */
     }
-
-   /*  .tags ul {
-        box-sizing: border-box;
-        width: 100%;
-        height: 100%;
-    } */
 
     .tags-li {
         float: left;    
@@ -141,12 +133,6 @@
         overflow: hidden;
         cursor: pointer;
         padding: 0 5px 0 12px;
-        /* margin: 3px 5px 2px 3px; */
-        /* height: 30px; */
-        /* line-height: 23px; */
-        /* border: 1px solid #e9eaec; */
-        /* background: #fff; */
-        /* vertical-align: middle; */
         color: #666;
         -webkit-transition: all .3s ease-in;
         -moz-transition: all .3s ease-in;
@@ -166,11 +152,6 @@
         float: left;
         line-height: 30px;
         overflow: hidden;
-        /* max-width: 80px; */
-        /* white-space: nowrap; */
-        /* text-overflow: ellipsis; */
-        /* margin-right: 5px; */
-        /* color: #666; */
     }
 
     .tags-li.active .tags-li-title {
@@ -181,15 +162,6 @@
         position: absolute; 
         right: 0;
         top: 0;
-        /* box-sizing: border-box; */
-        /* padding: 0px; */
-        /* text-align: center; */
-        /* width: 110px; */
-        /* line-height: 30px;*/
-         /* height: 30px;   */
-        /* background: #fff; */
-        /* box-shadow: -3px 0 15px 3px rgba(0, 0, 0, .1); */
-        /* z-index: 10; */
     } 
 
 </style>

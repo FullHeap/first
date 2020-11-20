@@ -15,9 +15,7 @@
 /* 利用bus 实现header和aside之间的消息传递 */
 import bus from "@/utils/bus";
 import { asyncRoutes } from "@/mock/json/menu";
-
 import MenuList from "@/components/MenuList";
-// import { filterAsyncRouter } from "@/utils/comp";
 
 export default {
   name: "MainAside",
@@ -39,7 +37,6 @@ export default {
       // console.log("AsideCollapse:" + msg);
       this.isCollapse = msg;
     });
-    this.routeradd();
   }
 };
 </script>
