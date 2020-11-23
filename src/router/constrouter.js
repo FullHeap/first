@@ -2,7 +2,7 @@ import ERROR from './modules/error'
 import system from '@/layout/main';
 
 /* constantRoutes静态路由，所有用户均可访问 */
-export const constantRoutes1 = [
+export const constantRoutes = [
     {
         path: '/',
         redirect: '/login'
@@ -16,19 +16,6 @@ export const constantRoutes1 = [
             title: '用户登录'
         }
     },
-    /* {
-        path: '',
-        redirect: 'index',
-        component: () => import('@/layout/main'),
-        children: [
-            {
-                path: 'index',
-                component: () => import('@/views/system/home'),
-                name: '首页',
-                meta: { title: '首页', icon: 'dashboard', noCache: true, affix: true }
-            }
-        ]
-    }, */
     // 系统首页    
     {
         path: '/index',
@@ -50,11 +37,7 @@ export const constantRoutes1 = [
 ]
 
 /* constantRoutes静态路由，所有用户均可访问 */
-export const constantRoutes2 = [
-    /* {
-        path: "/system",
-        redirect: '/system',
-    }, */
+export const errorRoutes = [
     ...ERROR,
     {
         path: '/*',
@@ -88,6 +71,6 @@ export function filterAsyncRouter(asyncRouterMap) {
 /* 加载路由组件，两种方式均可 */
 const loadView = (view) => { // 路由懒加载
     // return (resolve) => require([`@/views/${view}`], resolve)
-    // return () => import('@/views/' + view)
+    // return () => import('@/views/' + view) //webpack打包问题，报警告
     return () => Promise.resolve(require(`@/views/${view}`))
 }

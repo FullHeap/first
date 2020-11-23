@@ -56,7 +56,6 @@
               style="width:100%;"
               type="primary"
               @click="submitForm('ruleForm')"
-              
             >
               <span v-if="!loading">登 录</span>
               <span v-else>登 录 中...</span>
@@ -75,13 +74,22 @@
 import loginHeader from "@/layout/components/LoginHeader.vue";
 /* 底部 */
 import mainFooter from "@/layout/components/MainFooter.vue";
-import store from "@/store"
+// import store from "@/store"
 
 export default {
   name: "login",
   components: { loginHeader, mainFooter },
-  created(){
-    store.dispatch('GenerateRoutes');
+  created() {
+    //在路由守卫，每次路由变化时直接加载菜单
+    /* this.$store
+      .dispatch("GenerateRoutes")
+      .then(res => {
+        console.log(res);
+      })
+      .catch(() => {
+        this.loading = false;
+        this.getCode();
+      }); */
   },
   data: function() {
     return {
@@ -121,25 +129,6 @@ export default {
           /* 获取后台用户信息 */
           sessionStorage.setItem("userid", this.ruleForm.username);
           // debugger;
-
-          /* 获取菜单 */
-         /*  getRouters().then(res => {
-            console.log(res.data);
-          }); */
-
-         /*  this.axios
-            .get("https://mock.yonyoucloud.com/mock/16090/fxbank/test/menu")
-            .then(response => {
-               //response 第一层是promise ，数据中再是data 
-              sessionStorage.setItem(
-                "allrouter",
-                filterAsyncRouter(response.data.data)
-              );
-              let res = response.data;
-              
-              this.$router.addRoutes(filterAsyncRouter(res.data));
-              console.log(this.$router);
-            }); */
 
           if ("admin" == this.ruleForm.username) {
             /* 管理员 */

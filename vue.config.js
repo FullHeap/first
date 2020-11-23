@@ -9,7 +9,7 @@ function resolve(dir) {
 //覆盖vue默认配置
 module.exports = {
   runtimeCompiler: true,
-  publicPath: '/',
+  publicPath: '/',//???参数还需要了解，对页面刷新有影响
 
   // 是否开启eslint保存检测，有效值：ture | false | 'error'
   lintOnSave: process.env.NODE_ENV === 'dev',
