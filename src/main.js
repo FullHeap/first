@@ -16,8 +16,6 @@ import locale from 'element-ui/lib/locale/lang/en'
 import '@/assets/css/element-variables.scss'
 import '@/assets/css/main.scss'
 
-// import './promission'//这里进行路由后台获取的模拟
-
 Vue.use(ElementUI, { locale })
 
 //挂载element全局组件
@@ -33,42 +31,6 @@ Vue.config.productionTip = false
 
 //mock测试引入
 import './mock/mock.js'
-
-// 路由变化时
-router.beforeEach((to, from, next) => {
-  // console.log("addRoutes:"+store.state.addRoutes.length);
-  // console.log(router.matcher);
-  if (document.title !== to.meta.title) {
-    document.title = to.meta.title;
-  }
-  // 判断用户登录状态 
-  let userid = sessionStorage.getItem("userid");
-  if (userid != null) {
-    //判断store中是否含有routers，含有则是正常跳转
-    if (store.state.addRoutes.length > 0) {
-      next();
-    }
-    //不含有则是用户F5刷新
-    else {
-      console.log("to:" + to);
-      console.log("from:" + from);
-      if (from.path != to.path) {
-        store.dispatch("GenerateRoutes")
-          .then(res => {
-            console.log(res);
-          })
-      }
-      next();
-    }
-  }
-  else {
-    if (to.path === "/login") {
-      next();
-    } else {
-      next("/login");
-    }
-  }
-})
 
 new Vue({
   router,

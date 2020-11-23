@@ -14,7 +14,7 @@
 <script>
 /* 利用bus 实现header和aside之间的消息传递 */
 import bus from "@/utils/bus";
-import { asyncRoutes } from "@/mock/json/menu";
+// import { asyncRoutes } from "@/mock/json/menu";
 import MenuList from "@/components/MenuList";
 
 export default {
@@ -23,15 +23,19 @@ export default {
   data() {
     return {
       isCollapse: false,
-      items: asyncRoutes,
+      items: [],
     };
   },
   methods: {
-    
+    getMenu(){
+      // console.log(this.$store.state.asyncRoutes.addRoutes)
+      this.items = this.$store.state.asyncRoutes.addRoutes;
+    }
   },
 
   /* 在钩子函数中接收改变的值 */
   created() {
+    this.getMenu(),
     // 通过 Event Bus 进行组件间通信，来折叠侧边栏
     bus.$on("Collapse", msg => {
       // console.log("AsideCollapse:" + msg);
