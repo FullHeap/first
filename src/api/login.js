@@ -1,5 +1,13 @@
 import request from '@/utils/request'
 
+// 获取验证码
+export function getVerifyCode() {
+  return request({
+    url: '/getVerifyCode',
+    method: 'get'
+  })
+}
+
 // 登录方法
 export function login(username, password, code, uuid) {
   const data = {
@@ -31,13 +39,7 @@ export function logout() {
   })
 }
 
-// 获取验证码
-export function getCodeImg() {
-  return request({
-    url: '/captchaImage',
-    method: 'get'
-  })
-}
+
 
 /* // 获取路由
 export const getRouters = () => {

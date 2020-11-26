@@ -13,7 +13,7 @@
           class="login-ruleForm"
           size="medium"
         >
-          <el-form-item prop="systemid">
+          <!-- <el-form-item prop="systemid">
             <el-select
               v-model="ruleForm.systemid"
               clearable
@@ -28,7 +28,7 @@
               >
               </el-option>
             </el-select>
-          </el-form-item>
+          </el-form-item> -->
           <el-form-item prop="username">
             <el-input
               v-model="ruleForm.username"
@@ -49,6 +49,11 @@
             >
               <el-button slot="prepend" icon="el-icon-goods"></el-button>
             </el-input>
+          </el-form-item>
+          <el-form-item prop="code">
+              <el-input type="text" v-model="ruleForm.code" auto-complete="off"
+                        placeholder="验证码" @keydown.enter.native="submitLogin" style="width:60%;"></el-input>
+              <el-image class="login-code" :src="vcUrl" :fit="`fill`" @click="getImageCode"></el-image>
           </el-form-item>
           <el-form-item>
             <!-- loading 可显示加载中状态 :loading="true"-->
@@ -74,12 +79,14 @@
 import loginHeader from "@/layout/components/LoginHeader.vue";
 /* 底部 */
 import mainFooter from "@/layout/components/MainFooter.vue";
-// import store from "@/store"
+import {getVerifyCode} from "@/api/login"
 
 export default {
   name: "login",
   components: { loginHeader, mainFooter },
   created() {
+    this.getImageCode();
+
     //在路由守卫，每次路由变化时直接加载菜单
     /* this.$store
       .dispatch("GenerateRoutes")
@@ -93,6 +100,7 @@ export default {
   },
   data: function() {
     return {
+      vcUrl:"",
       ruleForm: {
         username: "admin",
         password: "admin"
@@ -108,14 +116,20 @@ export default {
           value: "cip"
         },
         {
-          value: "渠道活动平台",
-          label: "atv"
+          label: "渠道活动平台",
+          value: "atv"
         }
       ],
       loading: false
     };
   },
   methods: {
+    getImageCode(){
+      getVerifyCode().then((response)=>{
+        // console.log(response);
+        this.vcUrl = "data:image/gif;base64,"+ response.imgBase64
+      });
+    },
     submitForm(formName) {
       /* 表单校验 */
       this.$refs[formName].validate(valid => {
@@ -124,7 +138,8 @@ export default {
           /* localStorage 作用范围比sessionStorage大，sessionStorage在会话关闭后销毁 */
           sessionStorage.setItem("username", this.ruleForm.username);
           sessionStorage.setItem("systemid", this.ruleForm.systemid);
-          sessionStorage.setItem("password", this.ruleForm.systemid);
+          sessionStorage.setItem("password", this.ruleForm.password);
+
 
           /* 获取后台用户信息 */
           sessionStorage.setItem("userid", this.ruleForm.username);
@@ -165,8 +180,8 @@ export default {
   // height: 20%;
   /* 文字居中显示 */
   text-align: center;
-  line-height: 80px;
-  font-size: 20px;
+  line-height: 70px;
+  font-size: 25px;
   border-bottom: 1px solid #ddd;
   background-color: #409eff;
 }
@@ -190,10 +205,10 @@ export default {
 .ms-form {
   /* 大小占一半 */
   width: 50%;
-  height: 50%;
+  height: 40%;
   /* 水平垂直居中 */
   left: 50%;
-  top: 60%;
+  top: 50%;
   position: absolute;
   transform: translate(-50%, -50%);
 }
@@ -202,5 +217,12 @@ export default {
   position: absolute;
   bottom: 0px;
   width: 100%;
+}
+.login-code{
+  width: 40%;
+  height: 35px;
+  float: right;
+  cursor: pointer;
+  
 }
 </style>

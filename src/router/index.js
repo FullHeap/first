@@ -24,6 +24,7 @@ router.beforeEach((to, from, next) => {
   let userid = sessionStorage.getItem("userid");
   if (userid != null) {
     //判断store中是否含有routers，含有则是正常跳转
+    //router.app.$options.store 可以直接获取到store
     if (router.app.$options.store.state.asyncRoutes.addRoutes.length > 0) {
       next();
     }

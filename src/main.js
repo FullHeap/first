@@ -30,7 +30,7 @@ Vue.prototype.$message = ElementUI.Message;
 Vue.config.productionTip = false
 
 //mock测试引入
-import './mock/mock.js'
+//import './mock/mock.js'
 
 new Vue({
   router,

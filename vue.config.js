@@ -13,19 +13,20 @@ module.exports = {
 
   // 是否开启eslint保存检测，有效值：ture | false | 'error'
   lintOnSave: process.env.NODE_ENV === 'dev',
-  
+
+  // https://cli.vuejs.org/zh/config/#%E5%85%A8%E5%B1%80-cli-%E9%85%8D%E7%BD%AE
   devServer: {
     host: '0.0.0.0',
     port: port,
     proxy: {
       [process.env.VUE_APP_BASE_API]: {
-        target: 'http://localhost',
+        target: 'http://localhost:8080',
         changeOrigin: true,
         pathRewrite: {
           ['^' + process.env.VUE_APP_BASE_API]: ''
         }
-      }
-    }
+      },
+    },
   },
   //设置 svg图标  需要添加dev依赖svg-sprite-loader
   chainWebpack(config) {

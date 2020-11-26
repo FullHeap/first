@@ -24,6 +24,7 @@
 <script>
     import bus from '@/utils/bus';
     
+    /* 这里标签页没有做缓存，刷新过后，只会留下当前的页面 */
     export default {
         name:"MainTags",
         data() {
@@ -65,6 +66,7 @@
                     return item.path === route.fullPath;
                 })
                 if(!isExist){
+                    //如果超过八个，则把第一个给删除
                     if(this.tagsList.length >= 8){
                         this.tagsList.shift();
                     }
@@ -74,6 +76,7 @@
                         name: route.matched[1].components.default.name
                     })
                 }
+                //通知其他组件 tags的变化
                 bus.$emit('tags', this.tagsList);
             },
             handleTags(command){
