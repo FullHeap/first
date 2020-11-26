@@ -1,4 +1,4 @@
-# frist1
+# frist
 
 ## Project setup
 ```
