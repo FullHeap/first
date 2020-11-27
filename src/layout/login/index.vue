@@ -80,6 +80,8 @@ import loginHeader from "@/layout/components/LoginHeader.vue";
 /* 底部 */
 import mainFooter from "@/layout/components/MainFooter.vue";
 import {getVerifyCode} from "@/api/login"
+import { encrypt, decrypt } from '@/utils/crypt/jsencrypt'
+import { signature,verify} from '@/utils/crypt/jsrsacrypt'
 
 export default {
   name: "login",
@@ -139,7 +141,13 @@ export default {
           sessionStorage.setItem("username", this.ruleForm.username);
           sessionStorage.setItem("systemid", this.ruleForm.systemid);
           sessionStorage.setItem("password", this.ruleForm.password);
-
+          
+          console.log("签名后的密码："+signature(this.ruleForm.password))
+          console.log("签名后的密码："+verify(signature(this.ruleForm.password),this.ruleForm.password))
+          
+          console.log("加密后的密码："+this.ruleForm.password)
+          console.log("加密后的密码："+encrypt(this.ruleForm.password))
+          console.log("解密后的密码："+decrypt(encrypt(this.ruleForm.password)))
 
           /* 获取后台用户信息 */
           sessionStorage.setItem("userid", this.ruleForm.username);

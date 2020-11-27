@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-// 登录方法
+// 测试api
 export function testPost(string1, string2) {
   const data = {
     string1,
