@@ -1,9 +1,9 @@
 
 import jsrsasign from 'jsrsasign'
-import jsrsasignUtil from 'jsrsasign-util'
+// import jsrsasignUtil from 'jsrsasign-util'
 
 // 公钥
-let pk =
+let pubk =
     "-----BEGIN PUBLIC KEY-----\n" +
     "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDblel5BFNPG+HTSGJgGOBhNsv2\n" +
     "WOqwU7Dvxuj1A+nU3M3eXTLY/xFU7q9LyxG4yGiR3VvPgjaduiO2WGF2sZECpwf6\n" +
@@ -30,23 +30,25 @@ let priK =
     "C6FlHaQYqnycpQ==\n" +
     "-----END PRIVATE KEY-----";
 
-// 加签(用自己的私钥对signData进行签名)
+// 私钥加签
 export function signature(signData) {
-    console.log("jsutil:"+jsrsasignUtil.readFileHexByBin("./pri.key"));
-
+    // console.log("jsutil:"+jsrsasignUtil.readFileHexByBin("./pri.key"));
+    // 创建秘钥实例
     var key = jsrsasign.KEYUTIL.getKey(priK);
-    console.log(key);
+    // 指定签名算法 sha1对原文哈希
     let signature = new jsrsasign.KJUR.crypto.Signature({ alg: "SHA1withRSA" });
-    // 传入key实例, 初始化signature实例
+    // 传入秘钥实例, 初始化
     signature.init(key);
     // 传入待签明文
     signature.updateString(signData);
     // 签名, 得到16进制字符结果
-    let a = signature.sign();
-    let sign = jsrsasign.hextob64(a);
-    console.log(sign);
-    return sign;
+    let signResult = signature.sign();
+    // 签名hex转base64
+    let signBase64 = jsrsasign.hextob64(signResult);
+    // console.log(signBase64);
+    return signBase64;
 }
+
 
 export function signaturePCK8(signData) {
     let signature = new jsrsasign.KJUR.crypto.Signature({ alg: "SHA1withRSA", prvkeypem: priK });    //!这里指定 私钥 pem!
@@ -77,7 +79,7 @@ export function verify(signData, data) {
     try {
         // 验签
         // !要重新new 一个Signature, 否则, 取摘要和签名时取得摘要不一样, 导致验签误报失败(原因不明)!
-        let signatureVf = new jsrsasign.KJUR.crypto.Signature({ alg: "SHA1withRSA", prvkeypem: pk });
+        let signatureVf = new jsrsasign.KJUR.crypto.Signature({ alg: "SHA1withRSA", prvkeypem: pubk });
         signatureVf.updateString(data);
         // !接受的参数是16进制字符串!
         let result = signatureVf.verify(jsrsasign.b64tohex(signData));
@@ -87,3 +89,23 @@ export function verify(signData, data) {
         console.error(e);
     }
 }
+
+// 加密
+export function encrypt(encryptData) {
+    // 读取解析pem格式的秘钥, 生成秘钥实例 (RSAKey) 
+    var pub = jsrsasign.KEYUTIL.getKey(pubk);
+    var enc = jsrsasign.KJUR.crypto.Cipher.encrypt(encryptData, pub);
+    console.log("jsrsasign decrypt: " + enc);
+    console.log("jsrsasign hextob64: " + jsrsasign.hextob64(enc));
+    return enc;
+}
+
+// 解密
+export function decrypt(decryptData) {
+    var prv = jsrsasign.KEYUTIL.getKey(priK);
+    var dec = jsrsasign.KJUR.crypto.Cipher.decrypt(decryptData, prv);
+    console.log("jsrsasign decrypt: " + dec);
+    return dec;
+}
+
+

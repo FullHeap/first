@@ -4,6 +4,7 @@ import axios from 'axios'
 import { Notification, MessageBox, Message } from 'element-ui'
 import store from '@/store'
 import errorCode from '@/utils/errorCode'
+// import {generatekey,encryptDes,decryptDes} from '@/utils/crypt/des'
 
 axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
 
@@ -20,8 +21,6 @@ const service = axios.create({
 // request拦截器
 service.interceptors.request.use(
   req => {
-    
-
     return req
   },
   error => {
