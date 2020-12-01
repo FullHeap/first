@@ -12,3 +12,18 @@ export function testPost(string1, string2) {
     data: data
   })
 }
+
+
+
+
+/* this.axios.get(
+  '/json/cart.json',
+  'params'
+).then(
+  response => {
+    console.log(response);
+    let res = response.data;
+    debugger;
+    this.cartList = res.data;
+  }
+); */

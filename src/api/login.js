@@ -8,7 +8,7 @@ export function getVerifyCode() {
   })
 }
 
-// 登录方法
+// 登录
 export function login(username, password, code, uuid) {
   const data = {
     username,
@@ -17,8 +17,8 @@ export function login(username, password, code, uuid) {
     uuid
   }
   return request({
-    url: '/login',
-    method: 'post',
+    url: '/systemLogin',
+    method: 'POST',
     data: data
   })
 }
@@ -31,7 +31,7 @@ export function getInfo() {
   })
 }
 
-// 退出方法
+// 退出
 export function logout() {
   return request({
     url: '/logout',
@@ -41,30 +41,3 @@ export function logout() {
 
 
 
-/* // 获取路由
-export const getRouters = () => {
-  return request({
-    url: '/getRouters',
-    method: 'get'
-  })
-} */
-
-// 获取路由
-export function getRouters() {
-  return request({
-     url: '/getRouters',
-     method: 'get'
- })
-}
-
-/* this.axios.get(
-  '/json/cart.json',
-  'params'
-).then(
-  response => {
-    console.log(response);
-    let res = response.data;
-    debugger;
-    this.cartList = res.data;
-  }
-); */

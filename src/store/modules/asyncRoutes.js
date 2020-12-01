@@ -1,5 +1,5 @@
 import router from '@/router'
-import { getRouters } from '@/api/login.js'
+import { getRouters } from '@/api/router.js'
 import { constantRoutes, errorRoutes, filterAsyncRouter } from "@/router/constrouter";
 
 const asyncRoutes = {

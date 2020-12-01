@@ -4,7 +4,8 @@ import axios from 'axios'
 import { Notification, MessageBox, Message } from 'element-ui'
 import store from '@/store'
 import errorCode from '@/utils/errorCode'
-// import {generatekey,encryptDes,decryptDes} from '@/utils/crypt/des'
+import {generatekey,encryptDes ,decryptDes } from '@/utils/crypt/des'
+import {signature,/* verify, */encrypt, decrypt } from '@/utils/crypt/jsrsacrypt'
 
 axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
 
@@ -18,9 +19,34 @@ const service = axios.create({
   // 超时
   timeout: 10000
 })
+
+
 // request拦截器
 service.interceptors.request.use(
   req => {
+    
+    var key = generatekey(8);
+
+    console.log(req)
+    if(req.url == '/systemLogin'){
+      //敏感字段加密
+      req.data.password = encryptDes(req.data.password,key);
+      //加签数字签名
+      req.headers.sign = signature(JSON.stringify(req.data));
+      // console.log("sign:"+req.headers.sign);
+      // console.log("signdata:"+JSON.stringify(req.data));
+      //秘钥封数字信封
+      req.headers.envlop = encrypt(key);
+
+      // console.log("key:"+key);
+      // console.log("envlop:"+req.headers.envlop);
+      console.log("envlopdec:"+decrypt(req.headers.envlop));
+
+
+      // console.log(key)
+      // console.log(req.data.password)
+      console.log(decryptDes(req.data.password,key))  
+    }
     return req
   },
   error => {
@@ -33,6 +59,11 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   res => {
     console.log("res.data:" + JSON.stringify(res.data))
+
+    // console.log(verify(res.data,res.headers.sign));
+    console.log(res);
+
+
     // 未设置状态码则默认成功状态
     const code = res.data.code || 200;
     // 获取错误信息

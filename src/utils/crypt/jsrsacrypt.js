@@ -2,6 +2,10 @@
 import jsrsasign from 'jsrsasign'
 // import jsrsasignUtil from 'jsrsasign-util'
 
+// 密钥对生成 
+//http://web.chacuo.net/netrsakeypair
+//java 生成需要加上 -----BEGIN PUBLIC KEY-----和-----END PUBLIC KEY-----
+
 // 公钥
 let pubk =
     "-----BEGIN PUBLIC KEY-----\n" +
@@ -97,14 +101,15 @@ export function encrypt(encryptData) {
     var enc = jsrsasign.KJUR.crypto.Cipher.encrypt(encryptData, pub);
     console.log("jsrsasign decrypt: " + enc);
     console.log("jsrsasign hextob64: " + jsrsasign.hextob64(enc));
-    return enc;
+    return jsrsasign.hextob64(enc);
 }
 
 // 解密
 export function decrypt(decryptData) {
     var prv = jsrsasign.KEYUTIL.getKey(priK);
-    var dec = jsrsasign.KJUR.crypto.Cipher.decrypt(decryptData, prv);
+    var dec = jsrsasign.KJUR.crypto.Cipher.decrypt(jsrsasign.b64utohex(decryptData), prv);
     console.log("jsrsasign decrypt: " + dec);
+    console.log("jsrsasign b64utohex: " + jsrsasign.b64utohex(dec));
     return dec;
 }
 

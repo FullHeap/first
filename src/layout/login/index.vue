@@ -49,12 +49,17 @@
             >
               <el-button slot="prepend" icon="el-icon-goods"></el-button>
             </el-input>
+            
           </el-form-item>
           <el-form-item prop="code">
               <el-input type="text" v-model="ruleForm.code" auto-complete="off"
-                        placeholder="验证码" @keydown.enter.native="submitLogin" style="width:60%;"></el-input>
+                        placeholder="验证码" @keydown.enter.native="submitForm('ruleForm')" style="width:60%;"></el-input>
               <el-image class="login-code" :src="vcUrl" :fit="`fill`" @click="getImageCode"></el-image>
           </el-form-item>
+          <!-- <el-form-item prop="rememberMe">
+              
+          </el-form-item> -->
+          <el-checkbox v-model="ruleForm.rememberMe" style="margin:0px 0px 15px 0px; float:right">记住密码</el-checkbox>
           <el-form-item>
             <!-- loading 可显示加载中状态 :loading="true"-->
             <el-button
@@ -79,38 +84,34 @@
 import loginHeader from "@/layout/components/LoginHeader.vue";
 /* 底部 */
 import mainFooter from "@/layout/components/MainFooter.vue";
-import {getVerifyCode} from "@/api/login"
-// import { encrypt, decrypt } from '@/utils/crypt/jsencrypt'
-import { signature, verify, encrypt, decrypt} from '@/utils/crypt/jsrsacrypt'
+
+import { getVerifyCode, /* login */ } from "@/api/login"
+import Cookies from "js-cookie";
+import { encrypt, decrypt } from '@/utils/crypt/jsrsacrypt'
 
 export default {
   name: "login",
   components: { loginHeader, mainFooter },
   created() {
     this.getImageCode();
-
+    this.getCookie();
     //在路由守卫，每次路由变化时直接加载菜单
-    /* this.$store
-      .dispatch("GenerateRoutes")
-      .then(res => {
-        console.log(res);
-      })
-      .catch(() => {
-        this.loading = false;
-        this.getCode();
-      }); */
   },
   data: function() {
     return {
       vcUrl:"",
       ruleForm: {
         username: "admin",
-        password: "admin"
+        password: "admin",
+        rememberMe:true,
+        code:"",
+        uuid:""
       },
       rules: {
-        systemid: [{ required: true, message: "请选择系统", trigger: "blur" }],
+        // systemid: [{ required: true, message: "请选择系统", trigger: "blur" }],
         username: [{ required: true, message: "请输入用户", trigger: "blur" }],
-        password: [{ required: true, message: "请输入密码", trigger: "blur" }]
+        password: [{ required: true, message: "请输入密码", trigger: "blur" }],
+        code: [{ required: true, message: "请输入验证码", trigger: "blur" }]
       },
       options: [
         {
@@ -129,42 +130,68 @@ export default {
     getImageCode(){
       getVerifyCode().then((response)=>{
         // console.log(response);
-        this.vcUrl = "data:image/gif;base64,"+ response.imgBase64
+        this.vcUrl = "data:image/gif;base64,"+ response.imgBase64;
+        this.ruleForm.uuid = response.uuid;
       });
+    },
+    getCookie() {
+      const username = Cookies.get("username");
+      const password = Cookies.get("password");
+      const rememberMe = Cookies.get('rememberMe')
+      this.ruleForm = {
+        username: username === undefined ? this.ruleForm.username : username,
+        password: password === undefined ? this.ruleForm.password : decrypt(password),
+        rememberMe: rememberMe === undefined ? false : Boolean(rememberMe)
+      };
     },
     submitForm(formName) {
       /* 表单校验 */
       this.$refs[formName].validate(valid => {
         if (valid) {
           this.loading = true;
+
+          //cookies处理，记录30天
+          if (this.ruleForm.rememberMe) {
+            Cookies.set("username", this.ruleForm.username, { expires: 30 });
+            Cookies.set("password", encrypt(this.ruleForm.password), { expires: 30 });
+            Cookies.set('rememberMe', this.ruleForm.rememberMe, { expires: 30 });
+          } else {
+            Cookies.remove("username");
+            Cookies.remove("password");
+            Cookies.remove('rememberMe');
+          }
+
           /* localStorage 作用范围比sessionStorage大，sessionStorage在会话关闭后销毁 */
-          sessionStorage.setItem("username", this.ruleForm.username);
-          sessionStorage.setItem("systemid", this.ruleForm.systemid);
-          sessionStorage.setItem("password", this.ruleForm.password);
+          // sessionStorage.setItem("username", this.ruleForm.username);
+          // sessionStorage.setItem("password", encrypt(this.ruleForm.password));
           
-          console.log("签名后的密码："+signature(this.ruleForm.password))
-          console.log("签名后的密码："+verify(signature(this.ruleForm.password),this.ruleForm.password))
-          
-          console.log("加密前的密码："+this.ruleForm.password)
-          console.log("加密后的密码："+encrypt(this.ruleForm.password))
-          console.log("解密后的密码："+decrypt(encrypt(this.ruleForm.password)))
+          // login(this.ruleForm.username,this.ruleForm.password,this.ruleForm.code).then((response)=>{
+          //   console.log(response);
+          //   // this.vcUrl = "data:image/gif;base64,"+ response.imgBase64
+          // });
 
-          /* 获取后台用户信息 */
-          sessionStorage.setItem("userid", this.ruleForm.username);
-          // debugger;
+          this.$store
+            .dispatch("Login", this.ruleForm)
+            .then(() => {
+              this.$router.push({ path:"/system/home" });
+            })
+            .catch(() => {
+              this.loading = false;
+              this.getCode();
+            });
 
-          if ("admin" == this.ruleForm.username) {
-            /* 管理员 */
-            this.$router.push({ path: "/system/home" });
-          }
-          if ("cip" == this.ruleForm.username) {
-            /* cip系统用户 */
-            this.$router.replace("/cip/home");
-          }
-          if ("cap" == this.ruleForm.username) {
-            /* cap系统用户 */
-            this.$router.replace("/cap/home");
-          }
+          // if ("admin" == this.ruleForm.username) {
+          //   /* 管理员 */
+          //   this.$router.push({ path: "/system/home" });
+          // }
+          // if ("cip" == this.ruleForm.username) {
+          //   /* cip系统用户 */
+          //   this.$router.replace("/cip/home");
+          // }
+          // if ("cap" == this.ruleForm.username) {
+          //   /* cap系统用户 */
+          //   this.$router.replace("/cap/home");
+          // }
           return true;
         } else {
           console.log("error submit!!");
@@ -196,7 +223,7 @@ export default {
 .ms-login {
   /* 登录框占一半 */
   width: 30%;
-  height: 50%;
+  height: 55%;
   /* 水平垂直居中 */
   left: 50%;
   top: 50%;
