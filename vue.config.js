@@ -18,6 +18,7 @@ module.exports = {
   devServer: {
     host: '0.0.0.0',
     port: port,
+    https: true,
     proxy: {
       [process.env.VUE_APP_BASE_API]: {
         target: 'http://localhost:8080',

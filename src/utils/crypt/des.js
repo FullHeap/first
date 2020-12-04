@@ -11,14 +11,22 @@ export function generatekey(num) {
     return key;
 }
 
-//DES加密
+/* 支持的parse modules
+crypto-js/enc-latin1
+crypto-js/enc-utf8
+crypto-js/enc-hex
+crypto-js/enc-utf16
+crypto-js/enc-base64 */
+
 export function encryptDes(message, key) {
     var keyHex = cryptoJs.enc.Utf8.parse(key)
-    var option = { mode: cryptoJs.mode.ECB, padding: cryptoJs.pad.Pkcs7 }
-    var encrypted = cryptoJs.DES.encrypt(message, keyHex, option)
-    return encrypted.ciphertext.toString()
+    /* 这里的模式参数需要和后端匹配 mode.ECB，mode.CBC*/
+    var encrypted = cryptoJs.DES.encrypt(message, keyHex, { 
+        mode: cryptoJs.mode.ECB, 
+        padding: cryptoJs.pad.Pkcs7 
+    });
+    return encrypted.ciphertext.toString();
 }
-
 
 //DES解密
 export function decryptDes(message, key) {

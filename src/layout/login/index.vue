@@ -129,7 +129,7 @@ export default {
   methods: {
     getImageCode(){
       getVerifyCode().then((response)=>{
-        // console.log(response);
+        console.log(response);
         this.vcUrl = "data:image/gif;base64,"+ response.imgBase64;
         this.ruleForm.uuid = response.uuid;
       });
